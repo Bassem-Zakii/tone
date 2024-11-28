@@ -36,7 +36,6 @@ let endY = 0;
 // Function to update the active class to the middle item
 function updateActiveClass() {
   const middleIndex = Math.floor(items.length / 3);
-
   const activeOption = items[middleIndex];
 
   items.forEach((item) => item.classList.remove("active"));
@@ -84,6 +83,32 @@ function handleScroll(direction) {
   setTimeout(() => (isScrolling = false), 500);
 }
 
+// Center item on click
+items.forEach((item) => {
+  item.addEventListener("click", () => {
+    const clickedIndex = items.indexOf(item);
+    const middleIndex = Math.floor(items.length / 3);
+    const shifts = clickedIndex - middleIndex;
+
+    if (shifts > 0) {
+      for (let i = 0; i < shifts; i++) {
+        let first = items.shift();
+        items.push(first);
+      }
+    } else if (shifts < 0) {
+      for (let i = 0; i < Math.abs(shifts); i++) {
+        let last = items.pop();
+        items.unshift(last);
+      }
+    }
+
+    list.innerHTML = "";
+    items.forEach((item) => list.appendChild(item));
+
+    updateActiveClass();
+  });
+});
+
 // Wheel event for mouse scroll
 list.addEventListener("wheel", (event) => {
   event.preventDefault();
@@ -111,11 +136,9 @@ list.addEventListener("touchend", (event) => {
   }
 });
 
-
 // media content buttons add and remove active class when click
 
 let mediaBts = document.querySelectorAll(".media .media-content button");
-
 
 mediaBts.forEach((btns) => {
   btns.addEventListener("click", function () {
