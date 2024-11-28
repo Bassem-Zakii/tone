@@ -255,6 +255,7 @@ body {
 @media only screen and (max-width: 992px) {
   .media .media-wrapper {
     grid-template-columns: 1fr;
+    align-items: start;
   }
   .media .media-wrapper .media-options {
     width: 100%;
@@ -262,5 +263,9 @@ body {
   }
   .media .media-wrapper .media-content ul li .media-content-btns {
     justify-content: center;
+  }
+  .media .media-wrapper .media-content ul li .media-content-btns button {
+    width: 140px;
+    height: 140px;
   }
 }/*# sourceMappingURL=style.css.map */
